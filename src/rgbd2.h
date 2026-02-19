@@ -11,6 +11,8 @@ typedef struct rgbd2 {
 
     float mass;
 
+    float restitution;
+
     float width, height;
 
 } rgbd2;
