@@ -2,8 +2,8 @@
 
 #include "rgbd2.h"
 
-rgbd2 rgbd2_create(float x_pos, float y_pos, float mass, float size1, float size2) {
-    rgbd2 rgbd2 = {.pos.x = x_pos, .pos.y = y_pos, .mass = mass, .width = size1, .height = size2};
+rgbd2 rgbd2_create(float x_pos, float y_pos, float mass, float restitution, float size1, float size2) {
+    rgbd2 rgbd2 = {.pos.x = x_pos, .pos.y = y_pos, .mass = mass, .restitution = restitution, .width = size1, .height = size2};
     return rgbd2;
 }
 
@@ -91,23 +91,8 @@ void rgbd2_objectCollision(rgbd2* a, rgbd2* b)
         }
 
         // Invert y velocities
-        //float temp = a->vel.y;
-        //a->vel.y = b->vel.y;
-        //b->vel.y = temp;
-
-        float relative_vel = b->vel.y - a->vel.y;
-
-        if (relative_vel > 0) return;
-
-        float inv_massA = 1.0f / a->mass;
-        float inv_massB = 1.0f / b->mass;
-
-        float j = -(1.0f + a->restitution) * relative_vel;
-        j /= inv_massA + inv_massB;
-
-        float impulse = j;
-
-        a->vel.y -= impulse * inv_massA;
-        b->vel.y += impulse * inv_massB;
+        float temp = a->vel.y;
+        a->vel.y = b->vel.y;
+        b->vel.y = temp;
     }
 }

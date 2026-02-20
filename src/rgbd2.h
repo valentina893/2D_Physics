@@ -20,7 +20,7 @@ typedef struct rgbd2 {
 /*
 Initializes rgbd2 with position, mass, and dimensions
 */
-rgbd2 rgbd2_create(float x_pos, float y_pos, float mass, float size1, float size2);
+rgbd2 rgbd2_create(float x_pos, float y_pos, float mass, float restitution, float size1, float size2);
 
 /*
 Updates rgbd2 position via Euler integration
