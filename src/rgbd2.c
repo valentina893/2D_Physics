@@ -2,6 +2,11 @@
 
 #include "rgbd2.h"
 
+rgbd2 rgbd2_create(float x_pos, float y_pos, float mass, float restitution, float size1, float size2) {
+    rgbd2 rgbd2 = {.pos.x = x_pos, .pos.y = y_pos, .mass = mass, .restitution = restitution, .width = size1, .height = size2};
+    return rgbd2;
+}
+
 void rgbd2_integrateEuler(rgbd2* rgbd2, float dt) {
     rgbd2->vel = vec2_add(rgbd2->vel, vec2_mult(rgbd2->acc, (vec2){dt, dt}));
     rgbd2->pos = vec2_add(rgbd2->pos, vec2_mult(rgbd2->vel, (vec2){dt, dt}));
@@ -17,22 +22,22 @@ void rgbd2_windowCollision(rgbd2* rgbd2, int window_width, int window_height) {
 
     // colliding right
     if (rgbd2->pos.x + rgbd2->width > window_width) {
-        rgbd2->vel.x = -rgbd2->vel.x;
+        rgbd2->vel.x = -rgbd2->vel.x * rgbd2->restitution;
         rgbd2->pos.x = window_width - rgbd2->width;
     }
     // collide left
     if (rgbd2->pos.x < 0) {
-        rgbd2->vel.x = -rgbd2->vel.x;
+        rgbd2->vel.x = -rgbd2->vel.x * rgbd2->restitution;
         rgbd2->pos.x = 0;
     }
     // collide up
     if (rgbd2->pos.y < 0) {
-        rgbd2->vel.y = -rgbd2->vel.y;
+        rgbd2->vel.y = -rgbd2->vel.y * rgbd2->restitution;
         rgbd2->pos.y = 0;
     }
     // collide bottom
     if (rgbd2->pos.y + rgbd2->height > window_height) {
-        rgbd2->vel.y = -rgbd2->vel.y;
+        rgbd2->vel.y = -rgbd2->vel.y * rgbd2->restitution;
         rgbd2->pos.y = window_height - rgbd2->height;
     }
 
