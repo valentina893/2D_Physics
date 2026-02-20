@@ -3,7 +3,7 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 
-#include <SDL2/SDL.h>
+#include "SDL.h"
 
 // Basic renderer struct to handle low-level SDL components.
 typedef struct renderer {
