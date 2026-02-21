@@ -19,6 +19,10 @@ void input_read(input* input, int* running) {
                 break;
             case SDL_MOUSEBUTTONDOWN:
                 input->mouse_left_press = 1;
+                SDL_GetMouseState(&input->mouse_x, &input->mouse_y);
+                break;
+            case SDL_MOUSEBUTTONUP:
+                input->mouse_left_press = 0;
                 break;
             default:
                 break;
