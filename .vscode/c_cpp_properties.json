@@ -3,7 +3,7 @@
         {
             "name": "Mac",
             "includePath": [
-                "${workspaceFolder}/lib/"
+                "/opt/homebrew/opt/sdl2/include/SDL2"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/clang",
