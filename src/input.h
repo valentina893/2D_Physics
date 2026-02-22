@@ -9,7 +9,9 @@
 Input class that stores information about mouse input.
 */
 typedef struct input {
-    int mouse_left_press;
+    int mouse_left_down;
+    int mouse_left_pressed;
+    int mouse_left_released;
     int mouse_x, mouse_y;
 } input;
 
