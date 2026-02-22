@@ -1,6 +1,8 @@
 # 2D_Physics
 
-![Physics Demo](assets/demo.gif)
+<p align="center">
+  <img src="assets/demo.gif" width="600"/>
+</p>
 
 A lightweight 2D physics engine written in C using SDL2 for rendering and input handling.
 
