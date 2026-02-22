@@ -1,5 +1,7 @@
 # 2D_Physics
 
+![Physics Demo](assets/demo.gif)
+
 A lightweight 2D physics engine written in C using SDL2 for rendering and input handling.
 
 This project serves as a proof of concept for building a simple rigid body simulation from scratch, focusing on core physics principles and clean engine architecture.
