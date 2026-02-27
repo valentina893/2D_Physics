@@ -19,3 +19,9 @@ Features:
 - Basic object-to-object collision detection and response
 - Interactive mouse dragging with physics state management
 - Euler Integration for motion updates
+
+For mac/linux systems, compile and run with: 
+```
+make
+./snake
+```
