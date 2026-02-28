@@ -2,7 +2,7 @@ cc = gcc
 target = physics
 
 src_dir = src
-obj_dir = build
+obj_dir = bin
 
 src = $(wildcard $(src_dir)/*.c)
 obj = $(patsubst $(src_dir)/%.c,$(obj_dir)/%.o,$(src))
