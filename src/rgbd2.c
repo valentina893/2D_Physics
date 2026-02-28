@@ -3,7 +3,7 @@
 #include "rgbd2.h"
 
 rgbd2 rgbd2_create(float x_pos, float y_pos, float mass, float restitution, float size1, float size2) {
-    rgbd2 rgbd2 = {.pos.x = x_pos, .pos.y = y_pos, .mass = mass, .restitution = restitution, .width = size1, .height = size2};
+    rgbd2 rgbd2 = {.pos.x = x_pos, .pos.y = y_pos, .mass = mass, .inv_mass = 1.0f / mass, .restitution = restitution, .width = size1, .height = size2};
     return rgbd2;
 }
 
