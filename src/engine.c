@@ -108,7 +108,7 @@ void _engine_updateRgbdArr(engine* engine) {
 
     for (int i = 0; i < engine->arr_size; i++) {
         if (engine->rgbd_array[i].inv_mass != 0) {
-            rgbd2_applyForce(&engine->rgbd_array[i], 0, gravity * engine->rgbd_array[i].mass);
+            rgbd2_applyForce(&engine->rgbd_array[i], (vec2){0, gravity * engine->rgbd_array[i].mass}, (vec2){0, 0});
             rgbd2_integrateEuler(&engine->rgbd_array[i], delta_time);
             rgbd2_windowCollision(&engine->rgbd_array[i], engine->window_width+(50/2), engine->window_height+(50/2));
         }
