@@ -5,6 +5,9 @@
 
 #include "vec2.h"
 
+#define gravity 980.0f
+#define delta_time (1.0f / 60.0f)
+
 /*
 2D rigidbody struct that stores position, velocity, acceleration, mass, restitution, and dimensions.
 */
@@ -12,7 +15,7 @@ typedef struct rgbd2 {
 
     vec2 pos, vel, acc;
 
-    float mass;
+    float mass, inv_mass;
 
     float restitution;
 
