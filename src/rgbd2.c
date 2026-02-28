@@ -3,19 +3,37 @@
 #include "rgbd2.h"
 
 rgbd2 rgbd2_create(float x_pos, float y_pos, float mass, float restitution, float size1, float size2) {
-    rgbd2 rgbd2 = {.pos.x = x_pos, .pos.y = y_pos, .mass = mass, .inv_mass = 1.0f / mass, .restitution = restitution, .width = size1, .height = size2};
+    rgbd2 rgbd2 = {
+        .pos.x = x_pos, .pos.y = y_pos,
+        .mass = mass, .inv_mass = 1.0f / mass,
+        .inertia = (1.0f / 12.0f) * mass * (size1 * size1 + size2 * size2),
+        .restitution = restitution, 
+        .width = size1, .height = size2
+    };
+
+    rgbd2.inv_inertia = 1.0f / rgbd2.inertia;
+
     return rgbd2;
 }
 
 void rgbd2_integrateEuler(rgbd2* rgbd2, float dt) {
+    // linear
     rgbd2->vel = vec2_add(rgbd2->vel, vec2_mult(rgbd2->acc, (vec2){dt, dt}));
     rgbd2->pos = vec2_add(rgbd2->pos, vec2_mult(rgbd2->vel, (vec2){dt, dt}));
     rgbd2->acc = (vec2){0, 0};
+
+    // angular
+    rgbd2->angle_vel += rgbd2->angle_acc * dt;
+    rgbd2->angle += rgbd2->angle_vel * dt;
 }
 
-void rgbd2_applyForce(rgbd2* rgbd2, float x_force, float y_force) {
-    vec2 force = vec2_div((vec2){x_force, y_force}, (vec2){rgbd2->mass, rgbd2->mass});
+void rgbd2_applyForce(rgbd2* rgbd2, vec2 force, vec2 contact) {
+    force = vec2_div(force, (vec2){rgbd2->mass, rgbd2->mass});
     rgbd2->acc = vec2_add(rgbd2->acc, force);
+
+    vec2 r = vec2_sub(contact, rgbd2->pos);
+    float torque = r.x * force.y - r.y * force.x;
+    rgbd2->angle_vel += torque * rgbd2->inv_inertia;
 }
 
 void rgbd2_windowCollision(rgbd2* rgbd2, int window_width, int window_height) {

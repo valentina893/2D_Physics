@@ -15,7 +15,11 @@ typedef struct rgbd2 {
 
     vec2 pos, vel, acc;
 
+    float angle, angle_vel, angle_acc;
+
     float mass, inv_mass;
+
+    float inertia, inv_inertia;
 
     float restitution;
 
@@ -36,7 +40,7 @@ void rgbd2_integrateEuler(rgbd2* rgbd2, float dt);
 /*
 Updates rgbd2 acceleration with given force (can be gravity).
 */
-void rgbd2_applyForce(rgbd2* rgbd2, float x_force, float y_force);
+void rgbd2_applyForce(rgbd2* rgbd2, vec2 force, vec2 contact);
 
 /*
 Checks rgbd2 for colliding with window borders.
