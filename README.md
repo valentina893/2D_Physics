@@ -23,5 +23,5 @@ Features:
 For mac/linux systems, compile and run with: 
 ```
 make
-./snake
+./physics
 ```
